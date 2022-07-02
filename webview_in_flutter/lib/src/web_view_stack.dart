@@ -1,8 +1,12 @@
+import 'dart:async'; // Add this import for Completer
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewStack extends StatefulWidget {
-  const WebViewStack({Key? key}) : super(key: key);
+  const WebViewStack({required this.controller, Key? key})
+      : super(key: key); // Modify
+
+  final Completer<WebViewController> controller; // Add this attribute
 
   @override
   State<WebViewStack> createState() => _WebViewStackState();
@@ -17,6 +21,11 @@ class _WebViewStackState extends State<WebViewStack> {
       children: [
         WebView(
           initialUrl: 'https://flutter.dev',
+          // Add from here ...
+          onWebViewCreated: (webViewController) {
+            widget.controller.complete(webViewController);
+          },
+          // ... to here.
           onPageStarted: (url) {
             setState(() {
               loadingPercentage = 0;
@@ -36,8 +45,6 @@ class _WebViewStackState extends State<WebViewStack> {
         if (loadingPercentage < 100)
           LinearProgressIndicator(
             value: loadingPercentage / 100.0,
-            minHeight: 20.0,
-            color: Colors.yellow,
           ),
       ],
     );
