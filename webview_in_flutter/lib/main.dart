@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import 'src/web_view_stack.dart';
+
 void main() {
   runApp(const MaterialApp(
     home: WebViewApp(),
@@ -30,10 +32,13 @@ class _WebViewAppState extends State<WebViewApp> {
       appBar: AppBar(
         title: const Text('Flutter WebView'),
       ),
-      // Putting a Webview on the screen
-      body: const WebView(
-        initialUrl: 'htttps://flutter.dev',
-      ),
+      // // Putting a Webview on the screen
+      // body: const WebView(
+      //   initialUrl: 'htttps://flutter.dev',
+      // ),
+
+      // Adding page load events to your app
+      body: const WebViewStack(),
     );
   }
 }
