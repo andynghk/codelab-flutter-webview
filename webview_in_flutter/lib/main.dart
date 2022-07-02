@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import 'src/menu.dart';
 import 'src/navigation_controls.dart';
 import 'src/web_view_stack.dart';
 
@@ -36,7 +37,10 @@ class _WebViewAppState extends State<WebViewApp> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Flutter WebView'),
-        actions: [NavigationControls(controller: controller)],
+        actions: [
+          NavigationControls(controller: controller),
+          Menu(controller: controller),
+        ],
       ),
       // // Putting a Webview on the screen
       // body: const WebView(
