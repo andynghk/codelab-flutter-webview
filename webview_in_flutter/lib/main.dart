@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -15,6 +16,14 @@ class WebViewApp extends StatefulWidget {
 }
 
 class _WebViewAppState extends State<WebViewApp> {
+  @override
+  void initState() {
+    if (Platform.isAndroid) {
+      WebView.platform = SurfaceAndroidWebView();
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
